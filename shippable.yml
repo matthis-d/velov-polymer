@@ -12,5 +12,5 @@ script:
 after_success :
   - rm .gitignore
   - git add .
-  - git commit
+  - git commit -am "Push after build"
   - git push -f git@heroku.com:velov.git master
