@@ -7,7 +7,7 @@ install:
   - npm install -g bower
 
 script:
- - bower install
+ - bower install -F
 
 after_success :
   - rm .gitignore
