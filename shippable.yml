@@ -1,0 +1,10 @@
+language: node_js
+
+node_js:
+  - "0.10"
+
+script:
+ - bower install
+
+after_success :
+  - git push -f git@heroku.com:velov.git master
