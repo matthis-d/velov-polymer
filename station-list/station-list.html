@@ -1,0 +1,52 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../station-service/station-service.html">
+<link rel="import" href="../station-card/station-card.html">
+
+<polymer-element name="station-list" attributes="show">
+<template>
+<style>
+:host {
+    display: block;
+    width: 100%;
+}
+station-card {
+    margin-bottom: 30px;
+}
+</style>
+
+<station-service id="service" stations="{{stations}}">
+</station-service>
+
+<div layout vertical center>
+
+    <paper-input label="Rechercher" value="{{searchTerm}}"></paper-input>
+
+    <template repeat="{{station in stations | filter(searchTerm)}}">
+        <station-card>
+            <h2>{{station.name}}</h2>
+            <p>Places : {{station.available_bike_stands}} / Vélos : {{station.available_bikes}}</p>
+        </station-card>
+    </template>
+
+</div>
+
+</template>
+
+<script src="../bower_components/underscore/underscore.js"></script>
+<script>
+Polymer('station-list', {
+
+    filter: function(stations, searchTerm) {
+        if (!searchTerm) {
+            return stations;
+        }
+
+        return _.filter(stations, function(station) {
+            return station.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+        });
+    }
+});
+</script>
+
+</polymer-element>

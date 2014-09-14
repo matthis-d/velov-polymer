@@ -1,0 +1,35 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="station-service" attributes="stations">
+    <template>
+        <style>
+            :host {
+                display: none;
+            }
+        </style>
+        <core-ajax id="ajax"
+                   auto
+                   url="https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=445b1b8d3faff7875f2a3c75968cc88fc933649c"
+                   on-core-response="{{stationsLoaded}}"
+                   handleAs="json">
+        </core-ajax>
+    </template>
+    <script src="../bower_components/underscore/underscore.js"></script>
+    <script>
+        Polymer('station-service', {
+            created: function () {
+                this.stations = [];
+            },
+            stationsLoaded: function () {
+
+                console.log(this.$.ajax.response);
+
+                // Make a copy of the loaded data
+                this.stations = _.sortBy(this.$.ajax.response.slice(0), function (station) {
+                    return station.number;
+                });
+            }
+        });
+    </script>
+</polymer-element>
