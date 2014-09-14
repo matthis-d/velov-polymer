@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/google-map/google-map.html">
+<link rel="import" href="../bower_components/geo-location/geo-location.html">
 <link rel="import" href="../station-service/station-service.html">
 <link rel="import" href="../station-card/station-card.html">
 
@@ -19,7 +20,9 @@
         <station-service id="service" stations="{{stations}}">
         </station-service>
 
-        <google-map latitude="45.756860" longitude="4.837352" zoom="13">
+        <geo-location latitude="{{lat}}" longitude="{{lng}}"></geo-location>
+
+        <google-map latitude="{{lat}}" longitude="{{lng}}" zoom="{{zoom}}">
 
             <template repeat="{{station in stations}}">
                 <google-map-marker latitude="{{station.position.lat}}" longitude="{{station.position.lng}}" title="{{station.name}}">
@@ -34,7 +37,18 @@
     </template>
 
     <script>
-    Polymer({});
+    Polymer({
+        created: function() {
+            this.lat = 45.756860;
+            this.lng = 4.837352;
+            this.zoom = 13;
+
+            this.addEventListener('geo-response', function(e) {
+                this.zoom = 16;
+            });
+
+        }
+    });
     </script>
 
 </polymer-element>
