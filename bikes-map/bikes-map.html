@@ -19,7 +19,7 @@
         <station-service id="service" stations="{{stations}}">
         </station-service>
 
-        <google-map latitude="45.756860" longitude="4.837352" zoom="13" apiKey="AIzaSyD1-BDBPQv0o6ED1e5pn7kqYjSiDtmoYCg">
+        <google-map latitude="45.756860" longitude="4.837352" zoom="13">
 
             <template repeat="{{station in stations}}">
                 <google-map-marker latitude="{{station.position.lat}}" longitude="{{station.position.lng}}" title="{{station.name}}">

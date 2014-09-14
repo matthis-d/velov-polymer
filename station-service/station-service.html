@@ -23,8 +23,6 @@
             },
             stationsLoaded: function () {
 
-                console.log(this.$.ajax.response);
-
                 // Make a copy of the loaded data
                 this.stations = _.sortBy(this.$.ajax.response.slice(0), function (station) {
                     return station.number;
